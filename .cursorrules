@@ -1,0 +1,94 @@
+# Cursor Rules for Python AML Project
+
+## User Background & Communication
+- User: George (not a developer, needs clear explanations)
+- Goal: Create Excel processing tool with local development first, then Google Cloud deployment
+- Communication: Ask clarifying questions if requests are unclear
+- Always provide simple, non-technical explanations
+
+## Code Structure & Organization
+- Write modular, removable code sections
+- Use clear, descriptive variable names with auxiliary verbs (e.g., is_active, has_permission)
+- Separate concerns: file reading, data processing, file writing, error handling
+- Use lowercase with underscores for files and directories
+- Prefer functional programming over classes where possible
+- Use type hints for all function signatures
+
+## Code Comments & Documentation
+- Add simple, easy-to-understand comments for every section
+- Explain what each part does in plain language
+- Use comments to separate different functionalities
+- Include step-by-step explanations for complex operations
+
+## Excel File Structure (STANDARD - NEVER CHANGE)
+### Part 1: Positions (Columns A-G)
+- Header Row: Row 3
+- Data Rows: Row 4 onwards
+- Columns:
+  - C3: Position Open Date Time
+  - D3: Position Close Date Time
+  - E3: Position Duration
+  - F3: Margin Used
+  - G3: RPL
+
+### Part 2: Transactions (Columns I-P, sometimes Q)
+- Header Row: Row 5
+- Data Rows: Row 6 onwards
+- Columns:
+  - I5: Created Timestamp
+  - N5: User Balance
+  - O5: Deposits
+  - P5: Withdrawals or Refunds
+  - Q5: Withdrawals (if present)
+
+### Withdrawals/Refunds Logic:
+- If Q5 has data: P5 = Refunds, Q5 = Withdrawals
+- If Q5 is empty: P5 = Withdrawals, Q5 = ignored
+
+## Python Libraries & Dependencies
+- pandas (for Excel reading/writing and data manipulation)
+- openpyxl (for Excel file operations)
+- google-api-python-client (for Google Drive integration)
+- google-auth (for authentication)
+- requests (for HTTP operations)
+
+## Error Handling & Validation
+- Handle errors and edge cases at the beginning of functions
+- Use early returns for error conditions
+- Implement proper error logging with user-friendly messages
+- Validate file existence and structure before processing
+- Check for empty files or missing data
+
+## File Organization Structure
+- main.py (core processing logic)
+- file_reader.py (Excel file reading functions)
+- data_processor.py (data calculation and consolidation)
+- file_writer.py (Excel file writing functions)
+- config.py (configuration and constants)
+- utils.py (utility functions)
+
+## Development Workflow
+- Start with local development and testing
+- Use clear folder structure for input/output files
+- Test with sample data before cloud deployment
+- Keep local and cloud versions compatible
+
+## Google Cloud Integration (Future)
+- Use Google Drive API for file access
+- Deploy to Google Cloud Functions for serverless processing
+- Maintain same core logic between local and cloud versions
+- Use environment variables for configuration
+
+## Code Quality Standards
+- Use async/await for I/O operations when appropriate
+- Implement proper logging for debugging
+- Write unit tests for critical functions
+- Use Pydantic models for data validation when needed
+- Follow PEP 8 style guidelines
+
+## User Experience Considerations
+- Provide clear progress indicators
+- Handle large files efficiently
+- Give meaningful error messages
+- Allow easy configuration changes
+- Support batch processing of multiple files 
